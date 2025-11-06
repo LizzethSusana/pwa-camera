@@ -20,7 +20,6 @@
     <title>📸 CámaraPwa</title>
 
     <style>
-      /* 🌈 Estilo base */
       body {
         font-family: "Comic Sans MS", "Poppins", cursive;
         text-align: center;
@@ -61,7 +60,7 @@
         cursor: not-allowed;
       }
 
-      /* 🌸 Contenedor principal */
+      /* 🌸 Card contenedora de la cámara */
       #cameraContainer {
         display: none;
         margin-top: 25px;
@@ -70,34 +69,35 @@
         box-shadow: 0 4px 12px rgba(255, 182, 193, 0.3);
         padding: 20px;
         max-width: 420px;
+        width: 90%;
         margin-left: auto;
         margin-right: auto;
         transition: all 0.3s ease;
       }
 
-      /* 🎀 Vista de la cámara */
+      /* 🎀 Vista de cámara — contenedor fijo */
       #cameraView {
         width: 100%;
-        max-width: 340px;
-        aspect-ratio: 4 / 3;
+        max-width: 360px;
         margin: 0 auto 20px auto;
         position: relative;
-        overflow: hidden;
         border-radius: 16px;
         border: 3px solid #ffb6c1;
         box-shadow: inset 0 0 10px rgba(255, 182, 193, 0.4);
+        overflow: hidden; /* ✅ evita que el video se salga del borde */
         background: #fff;
       }
 
+      /* 📸 Asegura que el video se mantenga dentro */
       video,
       canvas {
         width: 100%;
-        height: 100%;
+        height: auto;
+        aspect-ratio: 4 / 3;
         border-radius: 16px;
         object-fit: cover;
-        position: absolute;
-        left: 0;
-        top: 0;
+        display: block;
+        margin: 0 auto;
       }
 
       canvas {
@@ -146,7 +146,7 @@
         box-shadow: 0 6px 10px rgba(255, 182, 193, 0.8);
       }
 
-      /* 📱 Responsivo */
+      /* 📱 Responsivo móvil */
       @media (max-width: 600px) {
         h1 {
           font-size: 1.6rem;
@@ -161,24 +161,29 @@
           display: block;
         }
 
-        /* Card visual envolvente en móvil */
         #cameraContainer {
           padding: 15px;
           border-radius: 18px;
-          width: 90%;
-          max-width: 340px;
-          margin: 20px auto;
+          width: 92%;
           box-shadow: 0 6px 14px rgba(255, 182, 193, 0.4);
         }
 
-        /* El video se queda dentro de la card */
+        /* ✅ En móvil, cámara centrada dentro de card */
         #cameraView {
           width: 100%;
-          aspect-ratio: 3 / 2;
           border: 2px solid #ffb6c1;
           border-radius: 14px;
-          overflow: hidden;
           box-shadow: inset 0 0 6px rgba(255, 182, 193, 0.3);
+          overflow: hidden;
+          margin: 0 auto;
+        }
+
+        video,
+        canvas {
+          aspect-ratio: 3 / 2;
+          width: 100%;
+          height: auto;
+          object-fit: cover;
         }
 
         .photo-card {
@@ -196,7 +201,7 @@
         }
       }
 
-      /* Extra pequeño (iPhone SE) */
+      /* Extra pequeño (iPhone SE y similares) */
       @media (max-width: 375px) {
         h1 {
           font-size: 1.3rem;
@@ -221,7 +226,7 @@
   </head>
 
   <body>
-    <h1>PWA Cámara </h1>
+    <h1>PWA Cámara</h1>
     <button id="openCamera">Abrir Cámara</button>
     <button id="switchCameraBtn" style="display: none">Cambiar Cámara</button>
 
@@ -237,7 +242,7 @@
     </div>
 
     <div id="galleryContainer">
-      <h3>📸 Galería </h3>
+      <h3>📸 Galería</h3>
       <div id="gallery"></div>
     </div>
 
